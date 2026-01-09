@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg-primary: 255 255 255;
+    --color-bg-secondary: 246 247 249;
+    --color-bg-tertiary: 236 238 242;
+    --color-text-primary: 26 29 36;
+    --color-text-secondary: 103 116 142;
+    --color-text-tertiary: 133 145 169;
+    --color-border: 213 217 226;
+    --color-border-hover: 176 184 200;
+  }
+
+  .dark {
+    --color-bg-primary: 26 29 36;
+    --color-bg-secondary: 52 57 69;
+    --color-bg-tertiary: 59 65 80;
+    --color-text-primary: 246 247 249;
+    --color-text-secondary: 176 184 200;
+    --color-text-tertiary: 133 145 169;
+    --color-border: 59 65 80;
+    --color-border-hover: 103 116 142;
+  }
+
+  * {
+    @apply border-[rgb(var(--color-border))];
+  }
+
+  body {
+    @apply bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))];
+    @apply font-sans antialiased;
+    @apply transition-colors duration-200;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold text-[rgb(var(--color-text-primary))];
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl;
+  }
+
+  h6 {
+    @apply text-base md:text-lg;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-[rgb(var(--color-bg-secondary))];
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[rgb(var(--color-border-hover))] rounded-full;
+    @apply hover:bg-primary-500;
+    @apply transition-colors duration-200;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-primary-500/20 text-primary-700;
+  }
+
+  .dark ::selection {
+    @apply bg-primary-400/20 text-primary-300;
+  }
+
+  /* Focus visible */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+    @apply dark:ring-offset-dark-950;
+  }
+}
+
+@layer components {
+
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/80 dark:bg-dark-900/80;
+    @apply backdrop-blur-xl backdrop-saturate-150;
+    @apply border border-white/20 dark:border-dark-700/50;
+  }
+
+  .glass-strong {
+    @apply bg-white/90 dark:bg-dark-900/90;
+    @apply backdrop-blur-2xl backdrop-saturate-200;
+    @apply border border-white/30 dark:border-dark-700/70;
+  }
+
+  /* Card component */
+  .card {
+    @apply bg-[rgb(var(--color-bg-secondary))] rounded-lg;
+    @apply border border-[rgb(var(--color-border))];
+    @apply shadow-soft hover:shadow-soft-lg;
+    @apply transition-all duration-200;
+  }
+
+  .card-interactive {
+    @apply card cursor-pointer;
+    @apply hover:border-[rgb(var(--color-border-hover))];
+    @apply hover:-translate-y-0.5;
+  }
+
+  /* Panel component */
+  .panel {
+    @apply bg-[rgb(var(--color-bg-primary))] rounded-xl;
+    @apply border border-[rgb(var(--color-border))];
+    @apply shadow-soft;
+  }
+
+  /* Text utilities */
+  .text-primary {
+    @apply text-[rgb(var(--color-text-primary))];
+  }
+
+  .text-secondary {
+    @apply text-[rgb(var(--color-text-secondary))];
+  }
+
+  .text-tertiary {
+    @apply text-[rgb(var(--color-text-tertiary))];
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-600 to-accent-500;
+    @apply bg-clip-text text-transparent;
+  }
+
+  /* Cinematic gradient background */
+  .cinematic-gradient {
+    @apply bg-gradient-to-br from-primary-500 via-primary-600 to-accent-500;
+  }
+
+  /* Loading shimmer */
+  .shimmer {
+    @apply bg-gradient-to-r from-transparent via-white/10 to-transparent;
+    @apply bg-[length:1000px_100%];
+    @apply animate-shimmer;
+  }
+}
+
+@layer utilities {
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Truncate with ellipsis */
+  .truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Animations */
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+  }
+}
